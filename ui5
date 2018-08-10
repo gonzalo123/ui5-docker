@@ -1,0 +1,35 @@
+#!/bin/bash
+
+help(){
+    echo "Usage:"
+    printf "\t build\t: Build containers.\n"
+    printf "\t down\t: Stop services (e.g. DB).\n"
+    printf "\t enter\t: Enter api container.\n"
+    printf "\t help\t: Show this help.\n"
+    printf "\t up\t: Launch app.\n"
+    exit 0
+}
+
+if [[ -z $1 ]];then
+    help
+    exit 0
+fi
+
+case $1 in
+    build)
+        docker-compose build --no-cache
+        ;;
+    up)
+        docker-compose up -d
+        docker run --rm -it -v ${PWD}/src/backend:/app composer:1.6 install
+        ;;
+    down)
+        docker-compose down
+        ;;
+    -e | enter)
+        docker-compose exec php /bin/sh -c "cd /code/src && /bin/bash"
+        ;;
+    * | -h | help)
+        help
+        ;;
+esac

@@ -1,0 +1,42 @@
+version: '3.4'
+
+services:
+  nginx:
+    image: gonzalo123.nginx
+    restart: always
+    ports:
+    - "8080:80"
+    build:
+      context: ./src
+      dockerfile: .docker/Dockerfile-nginx
+    volumes:
+    - ./src/backend:/code/src
+    - ./src/.docker/web/site.conf:/etc/nginx/conf.d/default.conf
+    networks:
+    - ui5-network
+  api:
+    image: gonzalo123.api
+    restart: always
+    build:
+      context: ./src
+      dockerfile: .docker/Dockerfile-lumen-dev
+    environment:
+      XDEBUG_CONFIG: remote_host=${MY_IP}
+    volumes:
+    - ./src/backend:/code/src
+    networks:
+    - ui5-network
+  ui5:
+    image: gonzalo123.ui5
+    ports:
+    - "8000:8000"
+    restart: always
+    build:
+      context: ./src
+      dockerfile: .docker/Dockerfile-ui5
+    networks:
+    - ui5-network
+
+networks:
+  ui5-network:
+    driver: bridge

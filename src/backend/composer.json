@@ -1,0 +1,32 @@
+{
+  "name": "gonzalo/ui5",
+  "description": "backend example ui5 locally",
+  "authors": [
+    {
+      "name": "Gonzalo Ayuso",
+      "email": "gonzalo123@gmail.com"
+    }
+  ],
+  "require": {
+    "roave/security-advisories": "dev-master",
+    "laravel/lumen": "^5.6",
+    "phpunit/phpunit": "^7.2"
+  },
+  "autoload-dev": {
+    "classmap": [
+      "tests/"
+    ]
+  },
+  "autoload": {
+    "psr-4": {
+      "App\\": "app/"
+    }
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "require-dev": {
+  },
+  "scripts": {
+    "test": "./vendor/bin/phpunit --colors=always"
+  }
+}

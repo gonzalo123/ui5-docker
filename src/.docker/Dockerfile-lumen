@@ -1,0 +1,19 @@
+FROM php:7.1-fpm
+
+ENV PHP_XDEBUG_REMOTE_ENABLE 1
+
+RUN apt-get update && apt-get install -my \
+    git \
+    libghc-zlib-dev && \
+    apt-get clean
+
+RUN apt-get install -y libpq-dev \
+    && docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql \
+    && docker-php-ext-install pdo pdo_pgsql pgsql opcache zip
+
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+RUN composer global require "laravel/lumen-installer"
+ENV PATH ~/.composer/vendor/bin:$PATH
+
+COPY ./backend /code/src

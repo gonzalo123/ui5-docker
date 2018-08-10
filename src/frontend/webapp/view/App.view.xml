@@ -1,0 +1,36 @@
+<mvc:View controllerName="gonzalo123.controller.App"
+          xmlns:html="http://www.w3.org/1999/xhtml"
+          xmlns:mvc="sap.ui.core.mvc"
+          displayBlock="true"
+          xmlns="sap.m">
+  <App id="idAppControl">
+    <pages>
+      <Page title="{i18n>appTitle}">
+        <content>
+          <List>
+            <items>
+              <ObjectListItem id="GET"
+                              title="{i18n>get}"
+                              type="Active"
+                              press="getPressHandle">
+                <attributes>
+                  <ObjectAttribute id="getCount"
+                                   text="{/Data/get/count}"/>
+                </attributes>
+              </ObjectListItem>
+              <ObjectListItem id="POST"
+                              title="{i18n>post}"
+                              type="Active"
+                              press="postPressHandle">
+                <attributes>
+                  <ObjectAttribute id="postCount"
+                                   text="{/Data/post/count}"/>
+                </attributes>
+              </ObjectListItem>
+            </items>
+          </List>
+        </content>
+      </Page>
+    </pages>
+  </App>
+</mvc:View>
