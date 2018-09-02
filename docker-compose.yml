@@ -31,6 +31,8 @@ services:
     ports:
     - "8000:8000"
     restart: always
+    volumes:
+    - ./src/frontend:/code/src
     build:
       context: ./src
       dockerfile: .docker/Dockerfile-ui5
